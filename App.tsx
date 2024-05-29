@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -5,11 +6,12 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
+  Button,
   StatusBar,
   StyleSheet,
   Text,
@@ -17,13 +19,7 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,6 +57,7 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const [count, setCont] = useState(0);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -76,20 +73,28 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <Text style={styles.titulo}>{count}</Text>
+
+          <View style={styles.botones}>
+            <Button
+              onPress={() => setCont(count + 1)}
+              title="Sumar"
+              color="#2441E6"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <Button
+              onPress={() => setCont(count - 1)}
+              title="Restar"
+              color="#2441E6"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <Button
+              onPress={() => setCont(0)}
+              title="Reset"
+              color="#2441E6"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -100,6 +105,15 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
+  },
+  botones: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  titulo: {
+    fontSize: 60,
+    marginVertical: 40,
+    textAlign: 'center',
   },
   sectionTitle: {
     fontSize: 24,
